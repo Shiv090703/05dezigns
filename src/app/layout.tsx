@@ -17,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "O5Dezigns",
   description: "A trusted company to help your business grow.",
+  icons: {
+    icon: "/Ellipse 18.ico",   
+  },
+
 };
 
 export default function RootLayout({
