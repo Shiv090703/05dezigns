@@ -45,36 +45,34 @@ export default function Home() {
       </section>
 
       {/* Vision Section */}
-      <section className="flex flex-col-reverse md:flex-row items-center justify-between bg-gradient-to-r from-purple-700 to-purple-400 text-white px-8 md:px-24 py-24">
-  <motion.div
-    className="w-full md:w-1/2 text-center md:text-left"
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-  >
-    <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
-      Your vision deserves designs that stand out.
-    </h2>
-    <p className="text-xl font-light">
-      We make it happen with creativity and precision.
-    </p>
-  </motion.div>
+      <section className="flex flex-col md:flex-row items-center bg-gradient-to-r from-purple-600 to-purple-400 text-white px-6 md:px-20 py-20">
+        <motion.div
+          className="max-w-md"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-snug">
+            Your vision deserves designs that stand out.
+          </h2>
+          <p className="text-lg">We make it happen with creativity and precision.</p>
+        </motion.div>
 
-  <motion.div
-    className="w-full md:w-1/2 flex justify-center md:justify-end mb-12 md:mb-0"
-    initial={{ opacity: 0, x: 60 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.8 }}
-  >
-    <Image
-      src="/phon.png"
-      alt="App Preview"
-      width={480}
-      height={480}
-      className="rounded-2xl shadow-2xl border-4 border-white"
-    />
-  </motion.div>
-</section>
+        <motion.div
+          className="mt-10 md:mt-0 md:ml-16"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Image
+            src="/phon.png"
+            alt="App Preview"
+            width={420}
+            height={420}
+            className="rounded-lg drop-shadow-xl"
+          />
+        </motion.div>
+      </section>
 
       {/* Features Section */}
       <section className="px-6 md:px-20 py-20 text-center bg-white">
