@@ -16,7 +16,7 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-5xl font-bold mb-4"
         >
-          Have a project in mind? Let’s Talk
+          Have a Project in mind? Let’s Talk
         </motion.h2>
         <p className="text-gray-600 mb-6 md:text-lg">
           Join us and transform your brand into a visual masterpiece.
