@@ -135,26 +135,7 @@ export default function ContactPage() {
         </motion.div>
       </section>
 
-      {/* Call to Action */}
-      <section className="text-center py-20">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold mb-4"
-        >
-          Have a project in mind? Let’s Talk
-        </motion.h2>
-        <p className="text-gray-300 mb-6">
-          Join us and transform your brand into a visual masterpiece.
-        </p>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-400 rounded-lg text-white font-semibold shadow-lg hover:opacity-90 transition"
-        >
-          Contact Us
-        </motion.button>
-      </section>
+      
     </div>
   );
 }
