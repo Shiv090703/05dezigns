@@ -1,10 +1,9 @@
 // components/Header.tsx
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -18,13 +17,22 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <motion.header
-      className="sticky top-0 z-50 bg-gray-100 shadow"
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "bg-white/40 backdrop-blur-lg border-b border-white/20 shadow-sm"
+          : "bg-white"
+      }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
@@ -40,27 +48,24 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link, i) => (
-            <motion.div
+          {navLinks.map((link) => (
+            <Link
               key={link.name}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
+              href={link.href}
+              className="relative text-gray-800 transition-colors hover:text-purple-600 
+                         after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 
+                         after:h-[2px] after:bg-purple-600 after:transition-all after:duration-300 
+                         hover:after:w-full"
             >
-              <Link
-                href={link.href}
-                className="text-gray-700 hover:text-purple-600 transition"
-              >
-                {link.name}
-              </Link>
-            </motion.div>
+              {link.name}
+            </Link>
           ))}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
+          <Link
+            href="/contact"
             className="rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 px-4 py-2 text-white hover:opacity-90"
           >
             Contact Us
-          </motion.button>
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -76,33 +81,28 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu with animation */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            key="mobileMenu"
-            className="md:hidden bg-white shadow px-6 py-4 space-y-4"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white/70 backdrop-blur-lg shadow px-6 py-4 space-y-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="block text-gray-800 hover:text-purple-600 transition"
+              onClick={() => setMobileOpen(false)}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            className="w-full block text-center rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 px-4 py-2 text-white hover:opacity-90"
+            onClick={() => setMobileOpen(false)}
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="block text-gray-700 hover:text-purple-600 transition"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <button className="w-full rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 px-4 py-2 text-white hover:opacity-90">
-              Contact Us
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+            Contact Us
+          </Link>
+        </div>
+      )}
+    </header>
   );
 }
